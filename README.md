@@ -1,5 +1,4 @@
-Online Car Auction - another clean architecture
-
+# Online Car Auction - another clean architecture
 
 # Inspection Service instructions
 
