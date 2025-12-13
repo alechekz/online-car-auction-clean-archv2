@@ -1,9 +1,9 @@
 Online Car Auction - another clean architecture
 
 
-// Inspection Service instructions
+# Inspection Service instructions
 
-// Generate gRPC code
+# Generate gRPC code
 protoc -I=services/inspection/internal/transport/gRPC/proto \
   -I=$(go list -m -f '{{.Dir}}' github.com/grpc-ecosystem/grpc-gateway/v2) \
   -I=$(go list -m -f '{{.Dir}}' github.com/googleapis/googleapis) \
@@ -13,7 +13,7 @@ protoc -I=services/inspection/internal/transport/gRPC/proto \
   --openapiv2_out=services/inspection/internal/transport/gRPC/proto \
   services/inspection/internal/transport/gRPC/proto/inspection.proto
 
-// gRPC calls
+# gRPC calls
 grpcurl -plaintext -d '{
   "vin": "5YJSA1E26MF168123",
   "year": 2020,
@@ -22,7 +22,7 @@ grpcurl -plaintext -d '{
 
 grpcurl -plaintext -d '{"vin":"5YJSA1E26MF168123"}' localhost:7073 inspection.InspectionService/GetBuildData
 
-// HTTP calls
+# HTTP calls
 curl -X POST -k http://localhost:7072/inspection/inspect -d '{
   "vin": "5YJSA1E26MF168123",
   "year": 2020,
