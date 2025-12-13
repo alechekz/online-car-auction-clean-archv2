@@ -7,6 +7,7 @@
 package proto_proto
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -290,7 +291,7 @@ var File_inspection_proto protoreflect.FileDescriptor
 const file_inspection_proto_rawDesc = "" +
 	"\n" +
 	"\x10inspection.proto\x12\n" +
-	"inspection\"'\n" +
+	"inspection\x1a\x1cgoogle/api/annotations.proto\"'\n" +
 	"\x13GetBuildDataRequest\x12\x10\n" +
 	"\x03vin\x18\x01 \x01(\tR\x03vin\"\x8b\x01\n" +
 	"\x11BuildDataResponse\x12\x10\n" +
@@ -309,10 +310,10 @@ const file_inspection_proto_rawDesc = "" +
 	"\x0fsuspension_fail\x18\a \x01(\bR\x0esuspensionFail\"@\n" +
 	"\x16InspectVehicleResponse\x12\x10\n" +
 	"\x03vin\x18\x01 \x01(\tR\x03vin\x12\x14\n" +
-	"\x05grade\x18\x02 \x01(\x05R\x05grade2\xbc\x01\n" +
-	"\x11InspectionService\x12N\n" +
-	"\fGetBuildData\x12\x1f.inspection.GetBuildDataRequest\x1a\x1d.inspection.BuildDataResponse\x12W\n" +
-	"\x0eInspectVehicle\x12!.inspection.InspectVehicleRequest\x1a\".inspection.InspectVehicleResponseBVZTgithub.com/alechekz/online-car-auction/services/inspection/delivery/grpc/proto:protob\x06proto3"
+	"\x05grade\x18\x02 \x01(\x05R\x05grade2\x86\x02\n" +
+	"\x11InspectionService\x12x\n" +
+	"\fGetBuildData\x12\x1f.inspection.GetBuildDataRequest\x1a\x1d.inspection.BuildDataResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /inspection/get-build-data/{vin}\x12w\n" +
+	"\x0eInspectVehicle\x12!.inspection.InspectVehicleRequest\x1a\".inspection.InspectVehicleResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/inspection/inspectBVZTgithub.com/alechekz/online-car-auction/services/inspection/delivery/grpc/proto:protob\x06proto3"
 
 var (
 	file_inspection_proto_rawDescOnce sync.Once

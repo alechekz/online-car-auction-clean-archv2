@@ -4,9 +4,21 @@ package inspection;
 
 option go_package = "github.com/alechekz/online-car-auction/services/inspection/delivery/grpc/proto:proto";
 
+import "google/api/annotations.proto";
+
 service InspectionService {
-  rpc GetBuildData(GetBuildDataRequest) returns (BuildDataResponse);
-  rpc InspectVehicle(InspectVehicleRequest) returns (InspectVehicleResponse);
+  rpc GetBuildData(GetBuildDataRequest) returns (BuildDataResponse) {
+    option (google.api.http) = {
+      get: "/inspection/get-build-data/{vin}"
+    };
+  }
+
+  rpc InspectVehicle(InspectVehicleRequest) returns (InspectVehicleResponse) {
+    option (google.api.http) = {
+      post: "/inspection/inspect"
+      body: "*"
+    };
+  }
 }
 
 message GetBuildDataRequest {

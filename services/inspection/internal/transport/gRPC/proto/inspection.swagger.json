@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "inspection.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "InspectionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/inspection/get-build-data/{vin}": {
+      "get": {
+        "operationId": "InspectionService_GetBuildData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inspectionBuildDataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "vin",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "InspectionService"
+        ]
+      }
+    },
+    "/inspection/inspect": {
+      "post": {
+        "operationId": "InspectionService_InspectVehicle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/inspectionInspectVehicleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/inspectionInspectVehicleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InspectionService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "inspectionBuildDataResponse": {
+      "type": "object",
+      "properties": {
+        "vin": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "string"
+        },
+        "transmission": {
+          "type": "string"
+        },
+        "msrp": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "inspectionInspectVehicleRequest": {
+      "type": "object",
+      "properties": {
+        "vin": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "odometer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "smallScratches": {
+          "type": "boolean"
+        },
+        "strongScratches": {
+          "type": "boolean"
+        },
+        "electricFail": {
+          "type": "boolean"
+        },
+        "suspensionFail": {
+          "type": "boolean"
+        }
+      }
+    },
+    "inspectionInspectVehicleResponse": {
+      "type": "object",
+      "properties": {
+        "vin": {
+          "type": "string"
+        },
+        "grade": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

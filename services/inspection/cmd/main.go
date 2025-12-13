@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log/slog"
 	"os"
 	"os/signal"
@@ -15,6 +16,8 @@ import (
 func main() {
 
 	// Prepare server
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
 	logger.Init()
 	cfg := config.New()
 	srv, err := server.New(cfg)
@@ -23,21 +26,16 @@ func main() {
 		return
 	}
 
-	// Graceful shutdown handling
-	stop := make(chan os.Signal, 1)
-	signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
-
 	// Start server in a separate goroutine
 	go func() {
-		if err := srv.Start(); err != nil {
+		if err := srv.Start(ctx); err != nil {
 			logger.Log.Error("failed to start server", slog.String("error", err.Error()))
 		}
 	}()
 
 	// Wait for interrupt signal to gracefully shutdown the server
-	<-stop
+	<-ctx.Done()
 	if err := srv.Stop(); err != nil {
 		logger.Log.Error("failed to stop server", slog.String("error", err.Error()))
 	}
-
 }
