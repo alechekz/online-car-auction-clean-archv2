@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/entity"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 )
 
 // InspectionUsecase defines the interface for inspection-related business logic

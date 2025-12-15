@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/entity"
-	usecase "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/service"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider"
+	usecase "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/service"
 )
 
 // test is a struct for inspection usecase tests

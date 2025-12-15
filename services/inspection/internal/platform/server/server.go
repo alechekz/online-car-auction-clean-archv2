@@ -15,10 +15,10 @@ import (
 	grpcDelivery "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC"
 	pb "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC/proto"
 
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/service"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/config"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/logger"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/service"
 )
 
 // Server represents both HTTP and gRPC servers for the Inspection Service

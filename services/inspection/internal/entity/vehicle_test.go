@@ -3,7 +3,7 @@ package entity_test
 import (
 	"testing"
 
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/entity"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -1,7 +1,7 @@
 package provider
 
 import (
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/entity"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 )
 
 // MockMSRPClient is a mock client for fetching MSRP data based on VIN

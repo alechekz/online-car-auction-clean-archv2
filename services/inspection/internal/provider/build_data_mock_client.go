@@ -1,7 +1,7 @@
 package provider
 
 import (
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/entity"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 )
 
 // MockBuildDataClient is a mock client for fetching build data based on VIN

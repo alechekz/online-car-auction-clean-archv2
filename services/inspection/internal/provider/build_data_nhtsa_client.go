@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/domain/entity"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 )
 
 // NHTSABuildDataClient is a client for fetching build data from the NHTSA API
