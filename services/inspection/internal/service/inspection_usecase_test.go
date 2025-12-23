@@ -6,8 +6,9 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider"
-	usecase "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/service"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider/builddataclient"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider/msrpdataclient"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/service"
 )
 
 // test is a struct for inspection usecase tests
@@ -50,9 +51,9 @@ func TestInspectionUsecase_InspectVehicle(t *testing.T) {
 	}
 
 	// Prepare in-memory repository and usecase
-	data := provider.NewNHTSABuildDataClient()
-	msrp := provider.NewMockMSRPClient()
-	uc := usecase.NewInspectionUC(data, msrp)
+	data := builddataclient.NewNHTSA()
+	msrp := msrpdataclient.NewMock()
+	uc := service.NewInspectionUC(data, msrp)
 
 	// Run tests
 	for _, test := range tests {

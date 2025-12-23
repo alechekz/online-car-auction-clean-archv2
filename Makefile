@@ -23,3 +23,30 @@ inspection-lint:
 	golangci-lint run ./services/inspection/...
 
 inspection: inspection-lint inspection-test inspection-local-build inspection-run
+
+
+# Pricing Service
+.PHONY: pricing-local-build, pricing-build, pricing-run, pricing-test, pricing-testcover, pricing-lint
+
+pricing-local-build:
+	@go build -o pricing-service -v ./services/pricing/cmd/main.go
+	@echo "pricing service successfully built"
+
+pricing-build:
+	CGO_ENABLED=0 GOOS=linux go build -o /bin/pricing -v ./services/pricing/cmd/main.go
+	@echo "pricing service successfully built"
+
+pricing-run:
+	@PRICING_HTTP=:7074 PRICING_GRPC=:7075 INSPECTION_URL=:7073 ./pricing-service
+
+pricing-test:
+	@go test -v ./services/pricing/...
+
+pricing-testcover:
+	@go test --cover ./services/pricing/... --coverprofile=testscoverprofile
+	@go tool cover -html=testscoverprofile
+
+pricing-lint:
+	golangci-lint run ./services/pricing/...
+
+pricing: pricing-lint pricing-test pricing-local-build pricing-run

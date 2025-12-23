@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pricing;
+
+option go_package = "github.com/alechekz/online-car-auction-clean-archv2/services/pricing/internal/transport/grpc/proto;proto";
+
+import "google/api/annotations.proto";
+
+service PricingService {
+  rpc GetRecommendedPrice(PriceRequest) returns (PriceResponse) {
+    option (google.api.http) = {
+      post: "/pricing/get-recommended-price"
+      body: "*"
+    };
+  }
+}
+
+message PriceRequest {
+  string vin = 1;
+  int32 odometer = 2;
+  int32 grade = 3;
+  string exterior_color = 4;
+  string interior_color = 5;
+}
+
+message PriceResponse {
+  uint64 price = 1;
+}

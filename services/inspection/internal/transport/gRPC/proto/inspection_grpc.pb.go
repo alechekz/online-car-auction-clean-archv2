@@ -4,7 +4,7 @@
 // - protoc             v6.33.1
 // source: inspection.proto
 
-package proto_proto
+package proto
 
 import (
 	context "context"

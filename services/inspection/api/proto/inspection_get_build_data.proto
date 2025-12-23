@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package inspection;
+
+option go_package = "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC/proto;proto";
+
+service InspectionService {
+  rpc GetBuildData(GetBuildDataRequest) returns (BuildDataResponse);
+}
+
+message GetBuildDataRequest {
+  string vin = 1;
+}
+
+message BuildDataResponse {
+  string vin = 1;
+  string brand = 2;
+  string engine = 3;
+  string transmission = 4;
+  uint64 msrp = 5;
+}

@@ -12,7 +12,7 @@ import (
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/server"
 )
 
-// main initializes and starts the Inspection Service HTTP server
+// main initializes and starts the Inspection Service gRPC/HTTP server
 func main() {
 
 	// Prepare server

@@ -12,12 +12,12 @@ type InspectionUsecase interface {
 
 // inspectionUsecase is the implementation of InspectionUsecase interface
 type inspectionUsecase struct {
-	dataProvider BuildDataProvider
-	msrpProvider MSRPProvider
+	dataProvider BuildDataClient
+	msrpProvider MSRPDataClient
 }
 
 // NewInspectionUC is the constructor for inspectionUsecase
-func NewInspectionUC(data BuildDataProvider, msrp MSRPProvider) InspectionUsecase {
+func NewInspectionUC(data BuildDataClient, msrp MSRPDataClient) InspectionUsecase {
 	return &inspectionUsecase{dataProvider: data, msrpProvider: msrp}
 }
 

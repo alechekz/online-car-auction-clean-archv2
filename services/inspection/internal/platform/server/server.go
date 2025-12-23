@@ -17,7 +17,8 @@ import (
 
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/config"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/logger"
-	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider/builddataclient"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/provider/msrpdataclient"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/service"
 )
 
@@ -33,8 +34,8 @@ func New(cfg *config.Config) (*Server, error) {
 
 	// dependencies
 	uc := service.NewInspectionUC(
-		provider.NewMockBuildDataClient(),
-		provider.NewMockMSRPClient(),
+		builddataclient.NewNHTSA(),
+		msrpdataclient.NewMock(),
 	)
 
 	// gRPC handler

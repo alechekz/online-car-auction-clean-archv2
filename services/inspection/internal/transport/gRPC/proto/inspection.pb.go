@@ -4,7 +4,7 @@
 // 	protoc        v6.33.1
 // source: inspection.proto
 
-package proto_proto
+package proto
 
 import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -313,7 +313,7 @@ const file_inspection_proto_rawDesc = "" +
 	"\x05grade\x18\x02 \x01(\x05R\x05grade2\x86\x02\n" +
 	"\x11InspectionService\x12x\n" +
 	"\fGetBuildData\x12\x1f.inspection.GetBuildDataRequest\x1a\x1d.inspection.BuildDataResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /inspection/get-build-data/{vin}\x12w\n" +
-	"\x0eInspectVehicle\x12!.inspection.InspectVehicleRequest\x1a\".inspection.InspectVehicleResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/inspection/inspectBVZTgithub.com/alechekz/online-car-auction/services/inspection/delivery/grpc/proto:protob\x06proto3"
+	"\x0eInspectVehicle\x12!.inspection.InspectVehicleRequest\x1a\".inspection.InspectVehicleResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/inspection/inspectBmZkgithub.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC/proto;protob\x06proto3"
 
 var (
 	file_inspection_proto_rawDescOnce sync.Once
