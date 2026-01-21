@@ -3,7 +3,7 @@ package inspectionclient
 import (
 	"context"
 
-	pb "github.com/alechekz/online-car-auction-clean-archv2/services/pricing/internal/provider/inspectionclient/proto"
+	pb "github.com/alechekz/online-car-auction-clean-archv2/gen/inspection/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

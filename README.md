@@ -1,18 +1,18 @@
 # Online Car Auction - another clean architecture
 
 
+# Generate services gRPC code
+buf generate
+mv gen/pricing/v1/api/proto/* gen/pricing/v1/
+rm -r gen/pricing/v1/api
+rm gen/pricing/v1/inspection*
+mv gen/inspection/v1/api/proto/* gen/inspection/v1/
+rm -r gen/inspection/v1/api
+rm gen/inspection/v1/pricing*
+goimports -w gen/
+
+
 # Inspection Service instructions
-
-
-# Generate Inspection gRPC code
-protoc -I=services/inspection/api/proto/ \
-  -I=$(go list -m -f '{{.Dir}}' github.com/grpc-ecosystem/grpc-gateway/v2) \
-  -I=$(go list -m -f '{{.Dir}}' github.com/googleapis/googleapis) \
-  --go_out=paths=source_relative:services/inspection/internal/transport/gRPC/proto \
-  --go-grpc_out=paths=source_relative:services/inspection/internal/transport/gRPC/proto \
-  --grpc-gateway_out=paths=source_relative:services/inspection/internal/transport/gRPC/proto \
-  --openapiv2_out=services/inspection/internal/transport/gRPC/proto \
-  services/inspection/api/proto/inspection.proto
 
 # gRPC calls
 grpcurl -plaintext -d '{
@@ -34,19 +34,3 @@ curl -i http://localhost:7072/inspection/get-build-data/5YJSA1E26MF168123
 
 
 # Pricing Service instructions
-
-# Generate Light Inspection gRPC client for Pricing Service
-protoc -I=services/inspection/api/proto \
-  --go_out=paths=source_relative:services/pricing/internal/provider/inspectionclient \
-  --go-grpc_out=paths=source_relative:services/pricing/internal/provider/inspectionclient \
-  services/inspection/api/proto/inspection_get_build_data.proto
-
-# Generate Pricing gRPC code
-protoc -I=services/pricing/api/proto/ \
-  -I=$(go list -m -f '{{.Dir}}' github.com/grpc-ecosystem/grpc-gateway/v2) \
-  -I=$(go list -m -f '{{.Dir}}' github.com/googleapis/googleapis) \
-  --go_out=paths=source_relative:services/pricing/internal/transport/gRPC/proto \
-  --go-grpc_out=paths=source_relative:services/pricing/internal/transport/gRPC/proto \
-  --grpc-gateway_out=paths=source_relative:services/pricing/internal/transport/gRPC/proto \
-  --openapiv2_out=services/pricing/internal/transport/gRPC/proto \
-  services/pricing/api/proto/pricing.proto

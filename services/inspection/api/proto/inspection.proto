@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package inspection;
+package inspection.v1;
 
-option go_package = "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC/proto;proto";
+option go_package = "github.com/alechekz/online-car-auction-clean-archv2/gen/inspection/v1;inspectionv1";
 
 import "google/api/annotations.proto";
 
 service InspectionService {
   rpc GetBuildData(GetBuildDataRequest) returns (BuildDataResponse) {
     option (google.api.http) = {
-      get: "/inspection/get-build-data/{vin}"
+      get: "/inspection/v1/get-build-data/{vin}"
     };
   }
 

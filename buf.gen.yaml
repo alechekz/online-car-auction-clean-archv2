@@ -1,0 +1,24 @@
+version: v1
+
+plugins:
+  # Pricing
+  - name: go
+    out: gen/pricing/v1
+    opt: paths=source_relative
+  - name: go-grpc
+    out: gen/pricing/v1
+    opt: paths=source_relative
+  - name: grpc-gateway
+    out: gen/pricing/v1
+    opt: paths=source_relative
+
+  # Inspection
+  - name: go
+    out: gen/inspection/v1
+    opt: paths=source_relative
+  - name: go-grpc
+    out: gen/inspection/v1
+    opt: paths=source_relative
+  - name: grpc-gateway
+    out: gen/inspection/v1
+    opt: paths=source_relative

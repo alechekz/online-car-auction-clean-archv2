@@ -3,9 +3,9 @@ package grpc
 import (
 	"context"
 
+	pb "github.com/alechekz/online-car-auction-clean-archv2/gen/inspection/v1"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/entity"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/service"
-	pb "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC/proto"
 )
 
 // InspectionServer implements the gRPC server for inspection service

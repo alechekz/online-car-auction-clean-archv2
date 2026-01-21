@@ -3,7 +3,7 @@ package grpc
 import (
 	"context"
 
-	pb "github.com/alechekz/online-car-auction-clean-archv2/services/pricing/internal/transport/gRPC/proto"
+	pb "github.com/alechekz/online-car-auction-clean-archv2/gen/pricing/v1"
 
 	"github.com/alechekz/online-car-auction-clean-archv2/services/pricing/internal/entity"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/pricing/internal/service"

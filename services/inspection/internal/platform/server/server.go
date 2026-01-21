@@ -12,8 +12,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 
+	pb "github.com/alechekz/online-car-auction-clean-archv2/gen/inspection/v1"
 	grpcDelivery "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC"
-	pb "github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/transport/gRPC/proto"
 
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/config"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/inspection/internal/platform/logger"

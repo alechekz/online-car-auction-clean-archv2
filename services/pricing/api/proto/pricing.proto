@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package pricing;
+package pricing.v1;
 
-option go_package = "github.com/alechekz/online-car-auction-clean-archv2/services/pricing/internal/transport/grpc/proto;proto";
+option go_package = "github.com/alechekz/online-car-auction-clean-archv2/gen/pricing/v1;pricingv1";
 
 import "google/api/annotations.proto";
 
 service PricingService {
   rpc GetRecommendedPrice(PriceRequest) returns (PriceResponse) {
     option (google.api.http) = {
-      post: "/pricing/get-recommended-price"
+      post: "/pricing/v1/get-recommended-price"
       body: "*"
     };
   }
