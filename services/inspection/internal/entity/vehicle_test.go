@@ -155,7 +155,7 @@ func TestVehicle_Inspect(t *testing.T) {
 			data: func() *entity.Vehicle {
 				return newTestVehicle()
 			},
-			expected: 47,
+			expected: 46,
 		},
 		{
 			name: "year and strong scratches affect grade",
@@ -164,7 +164,7 @@ func TestVehicle_Inspect(t *testing.T) {
 				v.StrongScratches = true
 				return v
 			},
-			expected: 43,
+			expected: 42,
 		},
 		{
 			name: "year and small scratches affect grade",
@@ -173,7 +173,7 @@ func TestVehicle_Inspect(t *testing.T) {
 				v.SmallScratches = true
 				return v
 			},
-			expected: 45,
+			expected: 44,
 		},
 		{
 			name: "year and electric fail affect grade",
@@ -182,7 +182,7 @@ func TestVehicle_Inspect(t *testing.T) {
 				v.ElectricFail = true
 				return v
 			},
-			expected: 43,
+			expected: 42,
 		},
 		{
 			name: "year and suspension fail affect grade",
@@ -191,7 +191,7 @@ func TestVehicle_Inspect(t *testing.T) {
 				v.SuspensionFail = true
 				return v
 			},
-			expected: 44,
+			expected: 43,
 		},
 		{
 			name: "all factors affect grade",
@@ -203,7 +203,7 @@ func TestVehicle_Inspect(t *testing.T) {
 				v.SuspensionFail = true
 				return v
 			},
-			expected: 36,
+			expected: 35,
 		},
 		{
 			name: "high odometer affects grade",

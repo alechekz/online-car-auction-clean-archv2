@@ -19,9 +19,9 @@ grpcurl -plaintext -d '{
   "vin": "5YJSA1E26MF168123",
   "year": 2020,
   "odometer": 15000
-}' localhost:7073 inspection.InspectionService/InspectVehicle
+}' localhost:7073 inspection.v1.InspectionService/InspectVehicle
 
-grpcurl -plaintext -d '{"vin":"5YJSA1E26MF168123"}' localhost:7073 inspection.InspectionService/GetBuildData
+grpcurl -plaintext -d '{"vin":"5YJSA1E26MF168123"}' localhost:7073 inspection.v1.InspectionService/GetBuildData
 
 # HTTP calls
 curl -X POST -k http://localhost:7072/inspection/inspect -d '{
@@ -30,7 +30,19 @@ curl -X POST -k http://localhost:7072/inspection/inspect -d '{
   "odometer": 15000
 }' -H "Content-Type: application/json"
 
-curl -i http://localhost:7072/inspection/get-build-data/5YJSA1E26MF168123
+curl -i http://localhost:7072/inspection/v1/get-build-data/5YJSA1E26MF168123
 
 
 # Pricing Service instructions
+
+# gRPC calls
+grpcurl -plaintext -d '{
+  "vin": "5YJSA1E26MF168123",
+  "grade": 47,
+  "odometer": 30000
+}' localhost:7075 pricing.v1.PricingService/GetRecommendedPrice
+
+# HTTP calls
+curl -i -X POST http://localhost:7074/pricing/v1/get-recommended-price \
+  -H "Content-Type: application/json" \
+  -d '{"vin":"5YJSA1E26MF168123","grade":47,"odometer":30000}'
