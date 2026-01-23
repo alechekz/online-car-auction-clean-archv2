@@ -56,7 +56,7 @@ func TestVehicle_Validate(t *testing.T) {
 			name: "too new year",
 			data: func() *entity.Vehicle {
 				v := newTestVehicle()
-				v.Year = 2026
+				v.Year = 2027
 				return v
 			},
 			isValid: false,
