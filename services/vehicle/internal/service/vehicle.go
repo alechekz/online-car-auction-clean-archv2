@@ -1,17 +1,19 @@
 package service
 
 import (
+	"context"
+
 	"github.com/alechekz/online-car-auction-clean-archv2/services/vehicle/internal/entity"
 	"github.com/alechekz/online-car-auction-clean-archv2/services/vehicle/internal/repository"
 )
 
 // VehicleUsecase defines the interface for vehicle-related business logic
 type VehicleUsecase interface {
-	Create(v *entity.Vehicle) error
-	Get(vin string) (*entity.Vehicle, error)
-	Update(v *entity.Vehicle) error
-	Delete(vin string) error
-	List() ([]*entity.Vehicle, error)
+	Create(ctx context.Context, cv *entity.Vehicle) error
+	Get(ctx context.Context, vin string) (*entity.Vehicle, error)
+	Update(ctx context.Context, v *entity.Vehicle) error
+	Delete(ctx context.Context, vin string) error
+	List(ctx context.Context) ([]*entity.Vehicle, error)
 	Fetch(v *entity.Vehicle) error
 }
 
@@ -65,7 +67,7 @@ func (uc *vehicleUsecase) Fetch(v *entity.Vehicle) error {
 }
 
 // Create creates a new vehicle record
-func (uc *vehicleUsecase) Create(v *entity.Vehicle) error {
+func (uc *vehicleUsecase) Create(ctx context.Context, v *entity.Vehicle) error {
 
 	// Validate the vehicle data
 	if err := v.Validate(); err != nil {
@@ -78,23 +80,16 @@ func (uc *vehicleUsecase) Create(v *entity.Vehicle) error {
 	}
 
 	// Save the vehicle record
-	return uc.repo.Save(v)
+	return uc.repo.Save(ctx, v)
 }
 
 // Get retrieves a vehicle by its VIN
-func (uc *vehicleUsecase) Get(vin string) (*entity.Vehicle, error) {
-	v, err := uc.repo.FindByVIN(vin)
-	if err != nil {
-		return nil, err
-	}
-	if v == nil {
-		return nil, err
-	}
-	return v, nil
+func (uc *vehicleUsecase) Get(ctx context.Context, vin string) (*entity.Vehicle, error) {
+	return uc.repo.FindByVIN(ctx, vin)
 }
 
 // Update updates an existing vehicle record
-func (uc *vehicleUsecase) Update(v *entity.Vehicle) error {
+func (uc *vehicleUsecase) Update(ctx context.Context, v *entity.Vehicle) error {
 
 	// Validate the vehicle data
 	if err := v.Validate(); err != nil {
@@ -107,21 +102,18 @@ func (uc *vehicleUsecase) Update(v *entity.Vehicle) error {
 	}
 
 	// Update the vehicle record
-	if err := uc.repo.Update(v); err != nil {
+	if err := uc.repo.Update(ctx, v); err != nil {
 		return err
 	}
 	return nil
 }
 
 // Delete deletes a vehicle by its VIN
-func (uc *vehicleUsecase) Delete(vin string) error {
-	if err := uc.repo.Delete(vin); err != nil {
-		return err
-	}
-	return nil
+func (uc *vehicleUsecase) Delete(ctx context.Context, vin string) error {
+	return uc.repo.Delete(ctx, vin)
 }
 
 // List lists all vehicles
-func (uc *vehicleUsecase) List() ([]*entity.Vehicle, error) {
-	return uc.repo.List()
+func (uc *vehicleUsecase) List(ctx context.Context) ([]*entity.Vehicle, error) {
+	return uc.repo.List(ctx)
 }

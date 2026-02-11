@@ -50,3 +50,35 @@ pricing-lint:
 	golangci-lint run ./services/pricing/...
 
 pricing: pricing-lint pricing-test pricing-local-build pricing-run
+
+# Vehicle Service
+.PHONY: vehicle-local-build, vehicle-build, vehicle-run, vehicle-test, vehicle-testcover, vehicle-lint
+
+vehicle-local-build:
+	@go build -o vehicle-service -v ./services/vehicle/cmd/main.go
+	@echo "vehicle service successfully built"
+
+vehicle-build:
+	CGO_ENABLED=0 GOOS=linux go build -o /bin/vehicle -v ./services/vehicle/cmd/main.go
+	@echo "vehicle service successfully built"
+
+vehicle-run:
+	@VEHICLE_URL=:7071 INSPECTION_URL=:7073 PRICING_URL=:7075 ./vehicle-service
+
+vehicle-test:
+	@go test -v ./services/vehicle/...
+
+vehicle-testcover:
+	@go test --cover ./services/vehicle/... --coverprofile=testscoverprofile
+	@go tool cover -html=testscoverprofile
+
+vehicle-lint:
+	golangci-lint run ./services/vehicle/...
+
+vehicle: vehicle-lint vehicle-test vehicle-local-build vehicle-run
+
+
+# Common
+.PHONY: lint
+lint:
+	golangci-lint run ./...

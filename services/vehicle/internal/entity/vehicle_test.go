@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alechekz/online-car-auction-clean-archv2/services/vehicle/internal/entity"
+	"github.com/alechekz/online-car-auction-clean-archv2/services/vehicle/internal/testhelpers"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -15,29 +16,20 @@ type test struct {
 	isValid bool
 }
 
-// newTestVehicle is a test valid vehicle instance
-func newTestVehicle() *entity.Vehicle {
-	return &entity.Vehicle{
-		VIN:      "1HGBH41JXMN109186",
-		Year:     2022,
-		Odometer: 12000,
-	}
-}
-
 // TestVehicle_Validate tests the Validate method of the Vehicle struct
 func TestVehicle_Validate(t *testing.T) {
 	tests := []test{
 		{
 			name: "valid vehicle",
 			data: func() *entity.Vehicle {
-				return newTestVehicle()
+				return testhelpers.NewTestVehicle()
 			},
 			isValid: true,
 		},
 		{
 			name: "invalid VIN",
 			data: func() *entity.Vehicle {
-				v := newTestVehicle()
+				v := testhelpers.NewTestVehicle()
 				v.VIN = "123"
 				return v
 			},
@@ -46,7 +38,7 @@ func TestVehicle_Validate(t *testing.T) {
 		{
 			name: "too old year",
 			data: func() *entity.Vehicle {
-				v := newTestVehicle()
+				v := testhelpers.NewTestVehicle()
 				v.Year = 1800
 				return v
 			},
@@ -55,7 +47,7 @@ func TestVehicle_Validate(t *testing.T) {
 		{
 			name: "too new year",
 			data: func() *entity.Vehicle {
-				v := newTestVehicle()
+				v := testhelpers.NewTestVehicle()
 				v.Year = 2027
 				return v
 			},
@@ -64,7 +56,7 @@ func TestVehicle_Validate(t *testing.T) {
 		{
 			name: "zero odometer",
 			data: func() *entity.Vehicle {
-				v := newTestVehicle()
+				v := testhelpers.NewTestVehicle()
 				v.Odometer = 0
 				return v
 			},
@@ -73,7 +65,7 @@ func TestVehicle_Validate(t *testing.T) {
 		{
 			name: "negative odometer",
 			data: func() *entity.Vehicle {
-				v := newTestVehicle()
+				v := testhelpers.NewTestVehicle()
 				v.Odometer = -5000
 				return v
 			},

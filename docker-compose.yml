@@ -1,0 +1,104 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: vehicle_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vehicle
+      POSTGRES_PASSWORD: qwerty12345
+      POSTGRES_DB: vehicles
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vehicle -d vehicles"]
+      interval: 5s
+      timeout: 2s
+      retries: 12
+
+  migrator:
+    image: migrate/migrate:latest
+    container_name: vehicle_migrator
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      'migrate -path /migrations -database "${POSTGRES_URL}" up || true'
+    volumes:
+      - ./migrations/vehicle:/migrations:ro
+    environment:
+      - POSTGRES_URL=${POSTGRES_URL}
+    restart: "no"
+
+  inspection:
+    build:
+      context: .
+      dockerfile: ./services/inspection/Dockerfile
+      target: runtime
+    container_name: inspection_api
+    ports:
+      - "8082:8082"   # REST
+      - "8083:8083"   # gRPC
+    environment:
+      - INSPECTION_HTTP=:8082
+      - INSPECTION_GRPC=:8083
+    volumes:
+      - ./:/src:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "grpcurl -plaintext localhost:8083 list inspection.v1.InspectionService || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 12
+
+  pricing:
+    build:
+      context: .
+      dockerfile: ./services/pricing/Dockerfile
+      target: runtime
+    container_name: pricing_api
+    ports:
+      - "8084:8084"   # REST
+      - "8085:8085"   # gRPC
+    environment:
+      - PRICING_HTTP=:8084
+      - PRICING_GRPC=:8085
+      - INSPECTION_URL=inspection:8083
+    volumes:
+      - ./:/src:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "grpcurl -plaintext localhost:8085 list pricing.v1.PricingService || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 12
+
+  vehicle:
+    build:
+      context: .
+      dockerfile: ./services/vehicle/Dockerfile
+      target: runtime
+    container_name: vehicle_app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+      inspection:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      - VEHICLE_DB=${POSTGRES_URL}
+      - VEHICLE_URL=:8081
+      - INSPECTION_URL=inspection:8083
+      - PRICING_URL=pricing:8085
+    volumes:
+      - ./:/src:ro
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
